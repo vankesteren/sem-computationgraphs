@@ -4,7 +4,7 @@
 </p>
 <br/>
 
-This repository contains the code to produce the figures and tables in the manuscript titled "SEM using Computation Graps" by Erik-Jan van Kesteren and Daniel Oberski. 
+This repository contains the code to produce the figures and tables in the manuscript titled "SEM using Computation Graphs" by Erik-Jan van Kesteren and Daniel Oberski. 
 
 ### Prerequisites
 This repository depends on the [computationgraph branch of `tensorsem`](https://github.com/vankesteren/tensorsem/tree/computationgraph). Please install `tensorsem` by following the instructions there.
