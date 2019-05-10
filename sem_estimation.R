@@ -41,7 +41,7 @@ hi_lav <- est_lav + 1.96 * se_lav
 parnames <- 
 c("Lambda[21]", "Lambda[31]", 
   "Lambda[52]", "Lambda[62]", 
-  "Beta[12]", 
+  "Beta[0~12]", 
   "Theta[11]",  "Theta[22]",  "Theta[33]",
   "Theta[44]",  "Theta[55]",  "Theta[66]",
   "Psi[11]",    "Psi[22]")
