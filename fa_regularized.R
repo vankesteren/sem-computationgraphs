@@ -1,6 +1,6 @@
 # LASSO FA example for the manuscript titled
 # "SEM using Computation Graphs"
-# Last edited: 09-05-2019 by Erik-Jan van Kesteren
+# Last edited: 08-10-2019 by Erik-Jan van Kesteren
 
 # load packages 
 # For installation of tensorsem see:
@@ -49,7 +49,7 @@ loading_2 <- tensem_fa$Lambda
 
 # Spike and slab prior and retrain
 tensem_fa$penalties$lasso_lambda  <- 0    # remove lasso
-tensem_fa$penalties$spike_lambda  <- 0.55 # spike
+tensem_fa$penalties$spike_lambda  <- 0.51 # spike
 tensem_fa$penalties$slab_lambda   <- 0.05 # slab
 tensem_fa$penalties$mixing_lambda <- 0.5  # proportion of loadings in spike
 tensem_fa$train(5e3, verbose = TRUE)
@@ -92,4 +92,5 @@ tibble(
   theme(legend.position = "top")
 
 # save plot
-firaSave("R/output/fa_priors.pdf", width = 9, height = 5)
+firaSave("img/fa_priors.pdf", width = 9, height = 5)
+firaSave("img/tiff/fa_priors.tiff", "tiff", width = 9, height = 5, dpi = 300)

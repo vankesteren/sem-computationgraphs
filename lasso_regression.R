@@ -1,6 +1,6 @@
 # LASSO estimation example for the manuscript titled
 # "SEM using Computation Graphs"
-# Last edited: 09-05-2019 by Erik-Jan van Kesteren
+# Last edited: 08-10-2019 by Erik-Jan van Kesteren
 
 # load packages 
 # For installation of tensorsem see:
@@ -65,3 +65,4 @@ tibble(
 
 # save plot
 firaSave("img/reg-results.pdf", width = 9, height = 5)
+firaSave("img/tiff/reg-results.tiff", "tiff", width = 9, height = 5, dpi = 300)

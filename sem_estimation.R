@@ -1,6 +1,6 @@
 # SEM estimation example for the manuscript titled
 # "SEM using Computation Graphs"
-# Last edited: 09-05-2019 by Erik-Jan van Kesteren
+# Last edited: 08-10-2019 by Erik-Jan van Kesteren
 
 # load packages 
 # For installation of tensorsem see:
@@ -18,18 +18,19 @@ F1 =~ x1 + x2 + x3
 F2 =~ x4 + x5 + x6
 F1 ~ F2
 "
-sem_lav <- sem(mod, HolzingerSwineford1939, information = "observed")
+sem_lav <- sem(mod, HolzingerSwineford1939, information = "observed", 
+               std.lv = TRUE)
 
 # Create a tensorsem object and estimate the parameters
 sem_mod <- tf_sem(mod, HolzingerSwineford1939)
 sem_mod$train(7000)
 
 # Compare the parameter estimates
-est_tf  <- sem_mod$delta_free[c(4:7, 3, 8:13, 1:2)]
+est_tf  <- sem_mod$delta_free[c(2:7, 1, 8:13)]
 est_lav <- coef(sem_lav)
 
 # Compute standard errors
-se_tf  <- sqrt(diag(sem_mod$ACOV))[c(4:7, 3, 8:13, 1:2)]
+se_tf  <- sqrt(diag(sem_mod$ACOV))[c(2:7, 1, 8:13)]
 se_lav <- sqrt(diag(vcov(sem_lav)))
 
 lo_tf  <- est_tf  - 1.96 * se_tf
@@ -65,4 +66,5 @@ tibble(
   scale_x_discrete(labels = parse(text = parnames))
 
 # save plot
-firaSave("R/output/sem-results.pdf", width = 9, height = 5)
+firaSave("img/sem-results.pdf", width = 9, height = 5)
+firaSave("img/tiff/sem-results.tiff", "tiff", width = 9, height = 5, dpi = 300)

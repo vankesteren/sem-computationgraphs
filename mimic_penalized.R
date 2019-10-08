@@ -1,6 +1,6 @@
 # LASSO MIMIC estimation example for the manuscript titled
 # "SEM using Computation Graphs"
-# Last edited: 09-05-2019 by Erik-Jan van Kesteren
+# Last edited: 08-10-2019 by Erik-Jan van Kesteren
 
 # load packages 
 # For installation of tensorsem see:
@@ -35,7 +35,7 @@ mod  <- paste(
 )
 
 # regsem first requires lavaan estimation
-lavaan_mod <- sem(mod, dat, information = "observed")
+lavaan_mod <- sem(mod, dat, information = "observed", std.lv = TRUE)
 regsem_mod <- regsem(lavaan_mod, lambda = 0.11, alpha = 0)
 
 # tensorsem estimation
@@ -44,7 +44,7 @@ tensem_mod$penalties$lasso_beta <- 0.11
 tensem_mod$train(4000)
 
 # get coefficients
-regsem_coef <- round(unlist(coef(regsem_mod)[5:24]), 3)
+regsem_coef <- round(unlist(coef(regsem_mod)[6:25]), 3)
 tensem_coef <- round(tensem_mod$Beta[1,-1], 3)
 
 # comparison of coefficients
@@ -64,4 +64,5 @@ tibble(
   theme(legend.position = "top")
 
 # save plot
-firaSave("R/output/mimic-results.pdf", width = 9, height = 5)
+firaSave("img/mimic-results.pdf", width = 9, height = 5)
+firaSave("img/tiff/mimic-results.tiff", "tiff", width = 9, height = 5, dpi = 300)

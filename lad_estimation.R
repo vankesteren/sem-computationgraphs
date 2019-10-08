@@ -1,6 +1,6 @@
 # LAD estimation example for the manuscript titled
 # "SEM using Computation Graphs"
-# Last edited: 09-05-2019 by Erik-Jan van Kesteren
+# Last edited: 08-10-2019 by Erik-Jan van Kesteren
 
 # load packages 
 # For installation of tensorsem see:
@@ -85,4 +85,5 @@ lad_mod_c$loss_vec %>%
   labs(x = "Iteration", y = "Loss value (LAD)")
 
 # save plot
-firaSave("R/output/loss-plot.pdf", width = 9, height = 4)
+firaSave("img/loss-plot.pdf", width = 9, height = 4)
+firaSave("img/tiff/loss-plot.tiff", "tiff", width = 9, height = 4, dpi = 300)
