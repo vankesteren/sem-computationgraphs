@@ -14,14 +14,15 @@ dat <- dat_raw %>%
   set_names("status", paste0("X", 1:22))
 
 # look at skewness
-dat %>% pivot_longer(cols = everything())  %>% 
+dat %>% 
+  pivot_longer(cols = everything())  %>% 
   ggplot(aes(x = value)) +
   geom_density(fill = "grey") +
   facet_wrap(~as_factor(name), scales = "free")
 
 # fix the skewness and check!
 dat %>% 
-  mutate_at(vars(paste0("X", 2:15)), log) %>% 
+  mutate(across(paste0("X", 2:15), log)) %>% 
   pivot_longer(cols = everything()) %>% 
   ggplot(aes(x = value)) +
   geom_density(fill = "grey") +
@@ -30,8 +31,8 @@ dat %>%
 # apply the fix and scale the data
 dat <- 
   dat %>% 
-  mutate_at(vars(paste0("X", 2:15)), log) %>% 
-  mutate_at(vars(paste0("X", 1:22)), scale) %>% 
+  mutate(across(paste0("X", 2:15), log)) %>% 
+  mutate(across(paste0("X", 1:22), function(x) c(scale(x)))) %>% 
   mutate(status = c(scale(status, center = TRUE, scale = FALSE)))%>% 
   as_tibble()
 
@@ -42,7 +43,7 @@ mod <- paste("Factor =~", paste(paste0("X", 1:22), sep = "", collapse = " + "),
 
 torch_opts_to_file(syntax_to_torch_opts(mod), 
                    filename = "sparse_factor/mod.pkl")
-write_csv(dat, path = "sparse_factor/dat.csv")
+write_csv(dat, file = "sparse_factor/dat.csv")
 
 # lavaan model for comparison
 fit <- lavaan::sem(mod, dat, std.lv = TRUE, information = "observed", 
@@ -59,14 +60,14 @@ pt_lav <- lavMatrixRepresentation(partable(fit)) %>%
 
 pt_ml <- lavMatrixRepresentation(partable_from_torch(
     pars = read_csv("sparse_factor/params_ml.csv"),
-    model = mod
+    syntax = mod
   )) %>% 
   filter(mat %in% c("lambda", "beta")) %>% 
   mutate(method = "ML (pytorch)")
 
 pt_pen <- lavMatrixRepresentation(partable_from_torch(
     pars = read_csv("sparse_factor/params_pen.csv"),
-    model = mod
+    syntax = mod
   )) %>% 
   filter(mat %in% c("lambda", "beta")) %>% 
   mutate(method = "Bayesian LASSO")

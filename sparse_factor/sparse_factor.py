@@ -6,7 +6,7 @@ import tensorsem as ts
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-WORK_DIR = Path("./experiments/sparse_factor")
+WORK_DIR = Path("./sparse_factor")
 
 ### OPTIMIZATION PARAMETERS ###
 LRATE = 0.001  # Adam learning rate
