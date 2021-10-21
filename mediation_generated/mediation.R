@@ -1,5 +1,5 @@
 # stress-test data generation
-# devtools::install_github("vankesteren/cmfilter")
+# remotes::install_github("vankesteren/cmfilter")
 library(tidyverse)
 library(firatheme)
 library(cmfilter)
@@ -30,12 +30,12 @@ torch_opts_to_file(opts, "mediation_generated/med_mod.pkl")
 ### READ OUTPUT ###
 pt_uls <- lavMatrixRepresentation(partable_from_torch(
   pars = read_csv("mediation_generated/params_uls.csv"),
-  model = model
+  syntax = model
 ))
 
 pt_lasso <- lavMatrixRepresentation(partable_from_torch(
   pars = read_csv("mediation_generated/params_lasso.csv"),
-  model = model
+  syntax = model
 ))
 
 tibble(

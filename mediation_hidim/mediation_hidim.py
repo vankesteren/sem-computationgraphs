@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import copy
 
-WORK_DIR = Path("./experiments/mediation_hidim")
+WORK_DIR = Path("./mediation_hidim")
 
 ### OPTIMIZATION PARAMETERS ###
 LRATE = 0.001  # Adam learning rate

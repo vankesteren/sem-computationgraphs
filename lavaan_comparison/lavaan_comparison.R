@@ -10,20 +10,20 @@ library(tensorsem)
 # Default political democracy model, but without constrained loadings
 mod_poldem <- "
   # latent variable definitions
-     ind60 =~ x1 + x2 + x3
-     dem60 =~ y1 + y2 + y3 + y4
-     dem65 =~ y5 + y6 + y7 + y8
+  ind60 =~ x1 + x2 + x3
+  dem60 =~ y1 + y2 + y3 + y4
+  dem65 =~ y5 + y6 + y7 + y8
 
   # regressions
-    dem60 ~ ind60
-    dem65 ~ ind60 + dem60
+  dem60 ~ ind60
+  dem65 ~ ind60 + dem60
 
   # residual correlations
-    y1 ~~ y5
-    y2 ~~ y4 + y6
-    y3 ~~ y7
-    y4 ~~ y8
-    y6 ~~ y8
+  y1 ~~ y5
+  y2 ~~ y4 + y6
+  y3 ~~ y7
+  y4 ~~ y8
+  y6 ~~ y8
 "
 
 opt_poldem <- syntax_to_torch_opts(mod_poldem)
@@ -56,8 +56,8 @@ fit_poldem <- sem(mod_poldem, dat_poldem, std.lv = TRUE,
                   information = "observed", fixed.x = FALSE)
 pt_poldem_lav   <- partable(fit_poldem) %>% mutate(method = "lavaan")
 pt_poldem_torch <- partable_from_torch(
-  pars  = read_csv("lavaan_comparison/poldem_pars.csv"), 
-  model = mod_poldem
+  pars   = read_csv("lavaan_comparison/poldem_pars.csv"), 
+  syntax = mod_poldem
 ) %>% mutate(method = "pytorch")
 
 plt_poldem <- 
@@ -83,7 +83,7 @@ fit_hs <- sem(mod_hs, dat_hs, std.lv = TRUE, information = "observed")
 pt_hs_lav   <- partable(fit_hs) %>% mutate(method = "lavaan")
 pt_hs_torch <- partable_from_torch(
   pars  = read_csv("lavaan_comparison/hs_pars.csv"),
-  model = mod_hs
+  syntax = mod_hs
 ) %>% mutate(method = "pytorch")
 
 plt_hs <- 

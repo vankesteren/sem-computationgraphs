@@ -29,19 +29,19 @@ mod  <- paste("y ~", paste0("X", 1:20, collapse = " + "))
 
 # Save for pytorch
 torch_opts_to_file(syntax_to_torch_opts(mod), "regularized_regression/mod.pkl")
-write_csv(dat, path = "regularized_regression/dat.csv")
+write_csv(dat, file = "regularized_regression/dat.csv")
 
 # glmnet estimation
 glmnet_mod <- glmnet(X, y, "gaussian", lambda = 0.028, intercept = FALSE)
 
 # regsem first requires lavaan estimation
 lavaan_mod <- sem(mod, dat, information = "observed")
-regsem_mod <- regsem(lavaan_mod, lambda = 0.11, alpha = 0)
+regsem_mod <- regsem(lavaan_mod, lambda = 0.11, alpha = 0, gradFun = "ram")
 
 # get coefficients for torch
 pt_torch <- partable_from_torch(
   pars = read_csv("regularized_regression/params_pen.csv"), 
-  model = mod
+  syntax = mod
 )
 
 

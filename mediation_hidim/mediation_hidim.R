@@ -30,12 +30,12 @@ sum(opts$delta_free)
 ### READ OUTPUT ###
 pt_uls <- lavMatrixRepresentation(partable_from_torch(
   pars = read_csv("mediation_hidim/params_uls.csv"),
-  model = med_mod
+  syntax = med_mod
 ))
 
 pt_lasso <- lavMatrixRepresentation(partable_from_torch(
   pars = read_csv("mediation_hidim/params_lasso.csv"),
-  model = med_mod
+  syntax = med_mod
 ))
 
 
@@ -52,7 +52,7 @@ tibble(
   geom_point() + 
   geom_text_repel(aes(label = label), color = "black") +
   scale_colour_fira() +
-  scale_alpha_manual(values = c("LASSO Estimate" = 1, "ULS Estimate" = 0.5), guide = FALSE) +
+  scale_alpha_manual(values = c("LASSO Estimate" = 1, "ULS Estimate" = 0.5), guide = "none") +
   theme_fira() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(x = "Mediator", y = "Absolute indirect effect", 

@@ -53,7 +53,7 @@ pt_lav_c <- lavMatrixRepresentation(partable(lav_mod_c)) %>%
 pt_torch <- lavMatrixRepresentation(
     partable_from_torch(
       pars = read_csv("lad_estimation/params.csv"),
-      model = mod
+      syntax = mod
     )
   ) %>% 
   filter(mat == "lambda") %>% 
@@ -62,7 +62,7 @@ pt_torch <- lavMatrixRepresentation(
 pt_torch_c <- lavMatrixRepresentation(
     partable_from_torch(
       pars = read_csv("lad_estimation/params_c.csv"),
-      model = mod
+      syntax = mod
     )
   ) %>% 
   filter(mat == "lambda") %>% 

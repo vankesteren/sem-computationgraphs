@@ -6,7 +6,7 @@ import tensorsem as ts
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-WORK_DIR = Path("./experiments/regularized_regression")
+WORK_DIR = Path("./regularized_regression")
 
 ### OPTIMIZATION PARAMETERS ###
 LRATE = 0.001  # Adam learning rate

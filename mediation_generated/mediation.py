@@ -6,7 +6,7 @@ import tensorsem as ts
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-WORK_DIR = Path("./experiments/mediation_generated")
+WORK_DIR = Path("./mediation_generated")
 
 ### OPTIMIZATION PARAMETERS ###
 LRATE = 0.01  # Adam learning rate

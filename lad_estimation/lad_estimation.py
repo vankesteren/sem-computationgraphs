@@ -6,7 +6,7 @@ import tensorsem as ts
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-WORK_DIR = Path("./experiments/lad_estimation")
+WORK_DIR = Path("./lad_estimation")
 
 ### OPTIMIZATION PARAMETERS ###
 LRATE = 0.0001  # Adam learning rate
@@ -53,7 +53,7 @@ plt.close()
 
 # save params to csv
 est = mod.free_params
-se = mod.Inverse_Hessian(ts.mvn_negloglik(dat, mod())).diag().sqrt()  # takes a while because we are inverting a big big matrix
+se = mod.Inverse_Hessian(ts.mvn_negloglik(dat, mod())).diag().sqrt()
 pd.DataFrame({"est": est.detach(), "se": se.detach()}).to_csv(WORK_DIR / "params.csv")
 
 
